@@ -64,7 +64,7 @@ const styles = {
     lists: [
       // Unordered lists
       "[&_ul]:pl-0 [&_ul]:list-none [&_ul]:space-y-0 [&_ul]:mt-4",
-      "[&_ul_li]:relative [&_ul_li]:pl-6 [&_ul_li]:mb-4 [&_ul_li]:first:mt-0",
+      "[&_ul_li]:relative [&_ul_li]:pl-6 [&_ul_li]:mb-4 [&_ul_li]:first:!mb-0",
       "[&_ul_li]:before:content-['+'] [&_ul_li]:before:absolute [&_ul_li]:before:left-1 [&_ul_li]:before:text-muted-foreground/50",
       // Ordered lists
       "[&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:space-y-2",
