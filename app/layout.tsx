@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 import { Layout } from "@/components/craft";
 import { ThemeProvider } from "@/components/theme/theme-provider";
+import { ThemeToggle } from "@/components/theme/theme-toggle";
+import { Analytics } from "@vercel/analytics/next";
 
 import "./globals.css";
 
@@ -37,9 +39,24 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <Header />
           {children}
+          <Toggle />
         </ThemeProvider>
+        <Analytics />
       </body>
     </Layout>
   );
 }
+
+const Header = () => {
+  return <div>Header</div>;
+};
+
+const Toggle = () => {
+  return (
+    <div className="fixed bottom-6 right-6">
+      <ThemeToggle />
+    </div>
+  );
+};
