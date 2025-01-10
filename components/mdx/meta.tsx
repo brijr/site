@@ -16,9 +16,7 @@ export function Meta({
 }: MetaProps) {
   return (
     <div className={cn("space-y-4", className)}>
-      <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-        {title}
-      </h1>
+      <h1 className="!mt-0">{title}</h1>
       {description && (
         <p className="text-xl text-muted-foreground">{description}</p>
       )}
