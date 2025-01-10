@@ -48,8 +48,12 @@ export default function HomePage() {
             </Row>
             <Row>
               <Child className="col-span-2 flex flex-col">
-                <Link href="/work">View my work</Link>
-                <Link href="/posts">Read my thoughts</Link>
+                <p>
+                  + <Link href="/work">View my work</Link>
+                </p>
+                <p>
+                  + <Link href="/posts">Read my thoughts</Link>
+                </p>
               </Child>
               <Child className="col-span-2 flex flex-col">
                 <p>
