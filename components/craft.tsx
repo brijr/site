@@ -43,10 +43,10 @@ const styles = {
     base: [
       "font-sans antialiased",
       // Headings
-      "[&_h1]:text-4xl [&_h1]:font-medium [&_h1]:tracking-tight [&_h1]:mt-8 [&_h1]:mb-4",
-      "[&_h2]:text-3xl [&_h2]:font-medium [&_h2]:tracking-tight [&_h2]:mt-8 [&_h2]:mb-4",
-      "[&_h3]:text-2xl [&_h3]:font-medium [&_h3]:tracking-tight [&_h3]:mt-6 [&_h3]:mb-3",
-      "[&_h4]:text-xl [&_h4]:font-medium [&_h4]:tracking-tight [&_h4]:mt-6 [&_h4]:mb-3",
+      "[&_h1]:text-3xl [&_h1]:font-medium [&_h1]:tracking-tight [&_h1]:mt-8 [&_h1]:mb-4",
+      "[&_h2]:text-2xl [&_h2]:font-medium [&_h2]:tracking-tight [&_h2]:mt-8 [&_h2]:mb-4",
+      "[&_h3]:text-xl [&_h3]:font-medium [&_h3]:tracking-tight [&_h3]:mt-6 [&_h3]:mb-3",
+      "[&_h4]:text-lg [&_h4]:font-medium [&_h4]:tracking-tight [&_h4]:mt-6 [&_h4]:mb-3",
       "[&_h5]:text-lg [&_h5]:font-medium [&_h5]:tracking-tight [&_h5]:mt-4 [&_h5]:mb-2",
       "[&_h6]:text-lg [&_h6]:font-medium [&_h6]:tracking-tight [&_h6]:mt-4 [&_h6]:mb-2",
       // Text elements
@@ -125,7 +125,7 @@ const styles = {
     ],
   },
   layout: {
-    spacing: "[&>*+*]:mt-6",
+    spacing: "[&>*+*]:mt-2",
     article: "max-w-prose",
     container: "max-w-4xl mx-auto p-6 sm:p-8",
     section: "py-8 md:py-12",
