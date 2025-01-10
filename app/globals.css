@@ -79,6 +79,7 @@
   }
 }
 
-.link {
+.link,
+a {
   @apply underline underline-offset-2 hover:text-orange;
 }
