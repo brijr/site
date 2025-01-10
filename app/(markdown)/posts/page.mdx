@@ -1,4 +1,12 @@
 import { PostWrapper } from "@/components/mdx/post-wrapper";
+import { Meta } from "@/components/mdx/meta";
+
+export const metadata = {
+  title: "Posts by Bridger Tower",
+  description: "A collection of posts on design and software engineering.",
+};
+
+<Meta {...metadata} />
 
 <PostWrapper>
 
@@ -6,8 +14,12 @@ Documentation
 
 - [Making my portfolio site](/site)
 
+<div className="mt-4">
 Guides
 
 - [Use Cloudflare R2 with Payload CMS](/payload-r2)
+- [Setting up a new Mac for TypeScript / Web Development](/mac)
+
+</div>
 
 </PostWrapper>

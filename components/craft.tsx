@@ -63,9 +63,9 @@ const styles = {
     // ],
     lists: [
       // Unordered lists
-      "[&_ul]:pl-0 [&_ul]:list-none [&_ul]:space-y-2",
-      "[&_ul_li]:relative [&_ul_li]:pl-6",
-      "[&_ul_li]:before:absolute [&_ul_li]:before:left-1 [&_ul_li]:before:top-[0.6875em] [&_ul_li]:before:h-1.5 [&_ul_li]:before:w-1.5 [&_ul_li]:before:rounded-full [&_ul_li]:before:bg-foreground/80",
+      "[&_ul]:pl-0 [&_ul]:list-none [&_ul]:space-y-0 [&_ul]:mt-4",
+      "[&_ul_li]:relative [&_ul_li]:pl-6 [&_ul_li]:mb-4 [&_ul_li]:first:mt-0",
+      "[&_ul_li]:before:content-['+'] [&_ul_li]:before:absolute [&_ul_li]:before:left-1 [&_ul_li]:before:text-muted-foreground/50",
       // Ordered lists
       "[&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:space-y-2",
       "[&_ol_ol]:list-[lower-alpha] [&_ol_ol]:pl-6",

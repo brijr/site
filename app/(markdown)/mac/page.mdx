@@ -1,0 +1,236 @@
+import { ThemeToggle } from "@/components/theme/theme-toggle";
+import { Meta } from "@/components/mdx/meta";
+import { PostWrapper } from "@/components/mdx/post-wrapper";
+
+export const metadata = {
+  title: "Setting up a new Mac for TypeScript / Web Development",
+  description:
+    "A guide on setting up a new Mac computer for TypeScript and web development",
+};
+
+<Meta {...metadata} className="mb-8" />
+
+<PostWrapper>
+
+# Setting Up a New Mac
+
+> This a guide on setting up a new Mac for a Design Engineer. My name is [Bridger Tower](bridger.to) and I am a software designer and developer. I use Typescript and React to design and develop products.
+
+### General Settings
+
+---
+
+**Initial Setup**
+
+- Check for system upgrade. To do that go: **Apple menu () > About This Mac > Software Update.**
+- Remove all Icons from the Dock by dragging them to the Trash icon
+
+**Appearance Settings**
+
+- Set appearance to dark mode
+- Set accent color to graphite
+
+**Control Center**
+
+- Modules
+
+![Image.jpeg](https://res.craft.do/user/full/80d2d291-fc94-8ed3-1d98-7f871ed42462/doc/BBAF7AAC-108D-4C7F-91B1-290218FF1783/A9F98996-9166-4EDC-999A-1BEC51319F30_2/GVgkVRfY2G5Gs0EM3TejC48pZ67Nuiv0WMsxgTynriEz/Image.jpeg)
+
+- Other Modules
+
+![Image.jpeg](https://res.craft.do/user/full/80d2d291-fc94-8ed3-1d98-7f871ed42462/doc/BBAF7AAC-108D-4C7F-91B1-290218FF1783/91CB0691-8FBC-4C29-9802-059C2CF8DCA1_2/zOrMoF3Bz7zeEPVHJTolFcDrfhln8SXBXtJkpKyjjDYz/Image.jpeg)
+
+- Menu Bar Only
+
+![Image.jpeg](https://res.craft.do/user/full/80d2d291-fc94-8ed3-1d98-7f871ed42462/doc/BBAF7AAC-108D-4C7F-91B1-290218FF1783/017C5E64-FAF0-41A9-BC94-9BCD1C28191D_2/JzuVy3Awux0fj71x5EJNk0jYdXuP1Nd9jxQRnyRzoNsz/Image.jpeg)
+
+**Users & Groups**
+
+- Login Options → Change fast user switching menu as Icon
+- Set up Password, Apple ID, Picture, etc.
+
+**Trackpad**
+
+- Point & Click
+  - Enable Tap to click with one finger
+  - Change Secondary click to Right corner
+  - Uncheck Three Finger Drag
+- Scroll & Zoom
+  - Uncheck all apart from Zoom in and out
+
+**Dock**
+
+- Visual Settings
+  - Change position to Left and make the size of icons Small
+- Other settings
+  - Remove workspace auto-switching by running the following command:
+
+```other
+defaults write com.apple.dock workspaces-auto-swoosh -bool NO
+killall Dock # Restart the Dock process
+```
+
+**Control Center**
+
+**Spotlight**
+
+- Use [Raycast](https://www.raycast.com/). See Below.
+
+**Accounts**
+
+- Add an iCloud account and sync Calendar, Find my Mac, Contacts etc.
+
+**User Defaults**
+
+- Enable repeating keys by pressing and holding down keys: `defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false` (and restart any app that you need to repeat keys in)
+- Change the default folder for screenshots
+  - Open the terminal and create the folder where you would like to store your screenshots: `mkdir -p /path/to/screenshots/`
+  - Then run the following command: `defaults write com.apple.screencapture location /path/to/screenshots/ && killall SystemUIServer`
+
+### Finder Settings
+
+---
+
+- Finder settings > General > New finder window shows home folder
+- Finder settings > Sidebar > Add home folder to sidebar, remove airdrop and tags
+- Finder settings > Advanced > While performing a search > search current folder
+- View > Show path bar
+- View > Show Status bar
+- Folders as columns
+
+## Applications and Software
+
+### First Installations
+
+---
+
+- [Install Arc as Default Browser](http://arc.net/)
+- [Install Brew to manage all services and casks](https://brew.sh/)
+
+```other
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+- Install [Warp](warp.dev) as default terminal → `brew install warp`
+  - Minimal window theme, Dark Pastel color scheme, font size 16
+- Install Raycast as default spotlight search → `brew install raycast`
+  - Replace default spotlight keyboard shortcut to use raycast
+- Install Node, NPM, NPX, etc. → `brew install node`
+
+### Coding and Development
+
+---
+
+- Script to run
+
+```other
+brew install gh visual-studio-code dbngin cursor zed herd local
+```
+
+- Github CLI → To manage GitHub code locally and on the server
+  - run `gh auth login` to get started
+  - Set `git` alias to have `git send`
+
+```other
+git config --global alias.send '!f() { git add . && git commit -m "${1:-wip}" && git push; }; f'
+```
+
+- Cursor → AI focused code editor
+  - Login with Github to use settings sync
+- Zed → Light weight collaborative code editor
+- Herd → PHP, Laravel, management
+  - Open Herd to set up
+- Linear → Development Project management
+- Local → Wordpress Development
+  - Install Rosetta to use this
+- Anaconda → Python Development ([Install here](https://www.anaconda.com/download))
+
+### Notes, Todos, and Calendar
+
+---
+
+- Script to run
+
+```other
+brew install notion todoist amie
+```
+
+- Notion → Notes and Docs
+- Notion Calendar → Multi-Calendar Management
+- Bear  → Notes and Docs
+- Craft Docs  → Notes and Docs
+- Todoist → Todo List
+
+ = Install on the Apple App Store
+
+### Other Software
+
+---
+
+- Script to run
+
+```other
+brew install spotify figma adobe-creative-cloud slack discord maccy raindropio
+```
+
+- Spotify → Music
+- Figma → Design Software
+- Creative Cloud → Design Software
+- Slack → Messaging
+- Discord → Messaging
+- Maccy → Clipboard Manager
+
+## Setting up a New Mac
+
+---
+
+To Begin
+
+- Name the user folder `brijr`
+- Set up iCloud
+- Update MacOS to latest version
+- Remove Apps from Dock
+- Install Homebrew
+- Install Warp
+
+Set up Terminal
+
+- Use zsh
+- Set up aliases
+- Theme Typewritten
+- Color scheme Flexoki
+
+Software to Install via Brew
+
+- Warp
+- Node
+- Git
+- gh
+- conda
+- pnpm
+- Rectangle
+- Maccy
+- Raycast
+- Figma
+- Spotify
+- Cursor
+- Zed
+- nvim
+- Notion
+- Chrome
+- Firefox Developer Edition
+- Setapp
+- Notion Calendar
+- Slack
+- Discord
+- Docker
+- Linear
+- Zoom
+
+Software to install via App Store
+
+- Craft
+- Cyberduck
+- Things
+
+</PostWrapper>
