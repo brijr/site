@@ -24,12 +24,7 @@ export const Child = ({
   className?: string;
 }) => {
   return (
-    <div
-      className={cn(
-        "p-4 sm:min-h-32 border-x border-muted hover:ring-orange hover:ring-[1px] hover:ring-inset",
-        className
-      )}
-    >
+    <div className={cn("p-4 sm:min-h-32 border-x border-muted", className)}>
       {children}
     </div>
   );

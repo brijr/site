@@ -57,10 +57,10 @@ const styles = {
       "[&_small]:text-sm [&_small]:font-medium [&_small]:leading-none",
       "[&_sub]:text-sm [&_sup]:text-sm",
     ],
-    links: [
-      "[&_a]:underline [&_a]:underline-offset-4 [&_a]:decoration-primary/50 [&_a]:transition-colors",
-      "hover:[&_a]:decoration-primary hover:[&_a]:text-primary",
-    ],
+    // links: [
+    //   "[&_a]:underline [&_a]:underline-offset-4 [&_a]:decoration-primary/50 [&_a]:transition-colors",
+    //   "hover:[&_a]:decoration-primary hover:[&_a]:text-primary",
+    // ],
     lists: [
       // Unordered lists
       "[&_ul]:pl-0 [&_ul]:list-none [&_ul]:space-y-2",
@@ -135,7 +135,7 @@ const styles = {
 // Combine all typography styles
 const baseTypographyStyles = [
   ...styles.typography.base,
-  ...styles.typography.links,
+  // ...styles.typography.links,
   ...styles.typography.lists,
   ...styles.typography.code,
   ...styles.typography.tables,

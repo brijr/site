@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function HomePage() {
   return (
-    <main>
+    <main className="text-lg">
       <Section>
         <Container>
           <Grid>
@@ -22,14 +22,21 @@ export default function HomePage() {
             <Row>
               <Child className="col-span-2">
                 <h3>
-                  Design Engineer exploring ui design, applied artificial
-                  intelligence, and human computer interaction.
+                  UI design, applied artificial intelligence, and human-computer
+                  interaction.
                 </h3>
               </Child>
               <Child className="col-span-2">
                 <h4>
-                  Currently, I work at Ampry and 9d8 building marketing and
-                  sales software.
+                  Currently, I work at{" "}
+                  <a href="https://ampry.com" target="_blank">
+                    Ampry
+                  </a>{" "}
+                  and{" "}
+                  <a href="https://9d8.dev" target="_blank">
+                    9d8
+                  </a>{" "}
+                  building marketing and sales software.
                 </h4>
               </Child>
             </Row>
@@ -45,34 +52,33 @@ export default function HomePage() {
                 <Link href="/posts">Read my thoughts</Link>
               </Child>
               <Child className="col-span-2 flex flex-col">
-                <a target="_blank" href="https://x.com/bridgertower">
-                  X.com
-                </a>
-                <a target="_blank" href="https://youtube.com/@bridgertower">
-                  YouTube
-                </a>
-                <a target="_blank" href="https://github.com/brijr">
-                  GitHub
-                </a>
-                <a target="_blank" href="https://linkedin.com/in/brijr">
-                  LinkedIn
-                </a>
-                <a target="_blank" href="mailto:bridger@wip.ac">
-                  Email
-                </a>
+                <p>
+                  Subscribe on{" "}
+                  <a target="_blank" href="https://youtube.com/@bridgertower">
+                    YouTube
+                  </a>
+                </p>
+                <p>
+                  See my resume on{" "}
+                  <a target="_blank" href="https://read.cv/brijr">
+                    read.cv
+                  </a>
+                </p>
+                <p>
+                  Follow me on{" "}
+                  <a target="_blank" href="https://x.com/bridgertower">
+                    x.com
+                  </a>
+                </p>
               </Child>
             </Row>
             <Row>
-              <Child />
-              <Child />
-              <Child />
-              <Child />
-            </Row>
-            <Row>
-              <Child className="col-span-2 text-muted-foreground">
-                © Bridger Tower, 2025-Present
+              <Child className="col-span-3 text-muted-foreground">
+                <p>
+                  © Bridger Tower, 2025-Present,{" "}
+                  <Link href="/site">read about my site</Link>
+                </p>
               </Child>
-              <Child />
               <Child />
             </Row>
           </Grid>
