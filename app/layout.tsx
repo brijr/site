@@ -38,7 +38,7 @@ export default function RootLayout({
     <Layout>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased w-screen font-light",
+          "min-h-screen bg-background font-sans antialiased w-screen leading-tight tracking-tight",
           fontSans.variable
         )}
       >
@@ -64,15 +64,25 @@ const Header = () => {
     <Section>
       <Container className="flex items-center justify-between gap-4">
         <Link href="/" className="hover:opacity-75 transition-all">
-          <Image src={Logo} width={36} height={29.31} alt="Bridger Logo" />
+          <Image
+            src={Logo}
+            width={36}
+            height={29.31}
+            className="invert dark:invert-0"
+            alt="Bridger Logo"
+          />
           <h3 className="sr-only">
             Bridger Tower / Designer and Software Engineer
           </h3>
         </Link>
 
         <div className="space-x-3">
-          <a href="https://github.com/brijr">GitHub</a>
-          <a href="https://x.com/bridgertower">X.com</a>
+          <a className="link" target="_blank" href="https://github.com/brijr">
+            GitHub
+          </a>
+          <a className="link" target="_blank" href="https://x.com/bridgertower">
+            X.com
+          </a>
         </div>
       </Container>
     </Section>
