@@ -1,5 +1,7 @@
-import { Section, Container, Article } from "@/components/craft";
+import { Section, Container } from "@/components/craft";
 import { Grid, Row, Child } from "@/components/grid";
+
+import Link from "next/link";
 
 export default function MarkdownLayout({
   children,
@@ -22,6 +24,15 @@ export default function MarkdownLayout({
               <Child></Child>
             </Row>
             {children}
+            <Row>
+              <Child className="col-span-3 text-muted-foreground">
+                <p>
+                  © Bridger Tower, 2025-Present,{" "}
+                  <Link href="/site">read about my site</Link>
+                </p>
+              </Child>
+              <Child />
+            </Row>
           </Grid>
         </Container>
       </Section>
