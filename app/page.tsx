@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function HomePage() {
   return (
-    <main className="text-lg">
+    <main className="text-lg tracking-tight leading-tight">
       <Section>
         <Container>
           <Grid>

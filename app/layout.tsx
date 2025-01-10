@@ -38,7 +38,7 @@ export default function RootLayout({
     <Layout>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased w-screen leading-tight tracking-tight",
+          "min-h-screen bg-background font-sans antialiased w-screen",
           fontSans.variable
         )}
       >

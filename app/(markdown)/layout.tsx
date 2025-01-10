@@ -9,20 +9,10 @@ export default function MarkdownLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className="text-lg">
+    <main className="text-lg tracking-tight leading-tight">
       <Section>
         <Container>
           <Grid>
-            <Row>
-              <Child className="col-span-2">
-                <p>Bridger Tower</p>
-                <p className="text-muted-foreground">
-                  Designer and Software Engineer
-                </p>
-              </Child>
-              <Child></Child>
-              <Child></Child>
-            </Row>
             {children}
             <Row>
               <Child className="col-span-3 text-muted-foreground">

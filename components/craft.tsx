@@ -50,7 +50,7 @@ const styles = {
       "[&_h5]:text-lg [&_h5]:font-medium [&_h5]:tracking-tight [&_h5]:mt-4 [&_h5]:mb-2",
       "[&_h6]:text-lg [&_h6]:font-medium [&_h6]:tracking-tight [&_h6]:mt-4 [&_h6]:mb-2",
       // Text elements
-      "[&_p]:text-lg [&_p]:leading-7 [&_p]:mb-4",
+      "[&_p]:text-lg [&_p]:leading-tight [&_p]:tracking-tight [&_p]:mb-4",
       "[&_strong]:font-semibold",
       "[&_em]:italic",
       "[&_del]:line-through",
