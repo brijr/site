@@ -4,6 +4,7 @@ import { Layout } from "@/components/craft";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { Analytics } from "@vercel/analytics/next";
+import { Toaster } from "sonner";
 
 import "./globals.css";
 
@@ -15,9 +16,13 @@ const fontSans = FontSans({
 });
 
 export const metadata: Metadata = {
-  title: "MDX Starter Template for Building Websites",
+  title: "Bridger Tower / Designer and Software Engineer",
   description:
-    "MDX and Next.js Starter made by Bridger Tower at 9d8 and WIP / AC",
+    "Bridger is a Design Engineer exploring user interface design, applied artificial intelligence, and human computer interaction.",
+  metadataBase: new URL("https://bridger.to"),
+  alternates: {
+    canonical: "/",
+  },
 };
 
 export default function RootLayout({
@@ -42,6 +47,7 @@ export default function RootLayout({
           <Header />
           {children}
           <Toggle />
+          <Toaster />
         </ThemeProvider>
         <Analytics />
       </body>
