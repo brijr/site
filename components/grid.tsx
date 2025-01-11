@@ -24,7 +24,7 @@ export const Child = ({
   className?: string;
 }) => {
   return (
-    <div className={cn("p-4 sm:min-h-32 border-x border-muted", className)}>
+    <div className={cn("sm:min-h-32 border-x border-muted", className)}>
       {children}
     </div>
   );
