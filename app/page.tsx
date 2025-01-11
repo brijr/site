@@ -62,7 +62,7 @@ export default function HomePage() {
                 <p>
                   + Subscribe on{" "}
                   <a target="_blank" href="https://youtube.com/@bridgertower">
-                    YouTube
+                    youtube.com
                   </a>
                 </p>
                 <p>
