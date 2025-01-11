@@ -57,6 +57,12 @@ export default function HomePage() {
               </Child>
               <Child className="col-span-2 flex flex-col text-muted-foreground">
                 <p>
+                  + Follow me on{" "}
+                  <a target="_blank" href="https://x.com/bridgertower">
+                    x.com
+                  </a>
+                </p>
+                <p>
                   + Subscribe on{" "}
                   <a target="_blank" href="https://youtube.com/@bridgertower">
                     youtube.com
@@ -66,12 +72,6 @@ export default function HomePage() {
                   + See my resume on{" "}
                   <a target="_blank" href="https://read.cv/brijr">
                     read.cv
-                  </a>
-                </p>
-                <p>
-                  + Follow me on{" "}
-                  <a target="_blank" href="https://x.com/bridgertower">
-                    x.com
                   </a>
                 </p>
               </Child>
