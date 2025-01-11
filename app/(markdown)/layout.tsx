@@ -12,7 +12,7 @@ export default function MarkdownLayout({
         <Container>
           <Grid>
             {children}
-            <Row className="sm:hidden">
+            <Row>
               <Child />
               <Child />
               <Child />

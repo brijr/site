@@ -52,7 +52,7 @@ export default function HomePage() {
                   + <Link href="/work">View my work</Link>
                 </p>
                 <p>
-                  + <Link href="/posts">Read my thoughts</Link>
+                  + <Link href="/posts">Read my posts</Link>
                 </p>
               </Child>
               <Child className="col-span-2 flex flex-col text-muted-foreground">

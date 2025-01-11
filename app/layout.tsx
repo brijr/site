@@ -38,7 +38,7 @@ export default function RootLayout({
     <Layout>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased w-screen",
+          "min-h-screen bg-background font-sans antialiased w-screen overflow-x-hidden",
           fontSans.variable
         )}
       >
@@ -51,7 +51,7 @@ export default function RootLayout({
           <Header />
           {children}
           <Toggle />
-          <Toaster />
+          <Toaster position="top-center" />
         </ThemeProvider>
         <Analytics />
       </body>
