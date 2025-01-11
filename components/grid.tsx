@@ -10,7 +10,7 @@ export const Grid = ({ children }: { children: React.ReactNode }) => {
 
 export const Row = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-4 border-y border-muted">
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-4 border-y border-muted">
       {children}
     </div>
   );

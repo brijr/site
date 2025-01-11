@@ -125,7 +125,7 @@ const styles = {
     ],
   },
   layout: {
-    spacing: "[&>*+*]:mt-2",
+    spacing: "sm:[&>*+*]:mt-2",
     article: "max-w-prose",
     container: "max-w-4xl mx-auto p-6 sm:p-8",
     section: "py-4 md:py-6",
