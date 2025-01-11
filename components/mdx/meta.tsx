@@ -7,13 +7,23 @@ interface MetaProps extends PageMeta {
 
 export function Meta({ title, description }: MetaProps) {
   return (
-    <Row>
-      <Child className="col-span-2">
-        <h1 className="!mt-0">{title}</h1>
-      </Child>
-      <Child className="col-span-2">
-        {description && <p className="text-muted-foreground">{description}</p>}
-      </Child>
-    </Row>
+    <>
+      <Row>
+        <Child className="col-span-2">
+          <h1 className="!mt-0">{title}</h1>
+        </Child>
+        <Child className="col-span-2">
+          {description && (
+            <p className="text-muted-foreground">{description}</p>
+          )}
+        </Child>
+      </Row>
+      <Row className="sm:hidden">
+        <Child />
+        <Child />
+        <Child />
+        <Child />
+      </Row>
+    </>
   );
 }

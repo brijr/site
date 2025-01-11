@@ -47,7 +47,7 @@ export default function HomePage() {
               <Child />
             </Row>
             <Row>
-              <Child className="col-span-2 flex flex-col space-y-2 sm:space-y-0">
+              <Child className="col-span-2 flex flex-col">
                 <p>
                   + <Link href="/work">View my work</Link>
                 </p>
