@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 
 export const Grid = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="grid gap-4 ring-[1px] ring-inset ring-muted">
+    <div className="grid gap-4 ring-[1px] ring-inset ring-muted/50">
       {children}
     </div>
   );
@@ -10,7 +10,7 @@ export const Grid = ({ children }: { children: React.ReactNode }) => {
 
 export const Row = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="grid grid-cols-1 gap-4 lg:grid-cols-4 border-y border-muted">
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-4 border-y border-muted/50">
       {children}
     </div>
   );
@@ -24,7 +24,7 @@ export const Child = ({
   className?: string;
 }) => {
   return (
-    <div className={cn("sm:min-h-32 border-x border-muted", className)}>
+    <div className={cn("sm:min-h-32 border-x border-muted/50", className)}>
       {children}
     </div>
   );
