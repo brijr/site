@@ -90,7 +90,6 @@ export default function HomePage() {
                   <a href="https://designbooks.org/grid-system-in-graphic-design">
                     grids
                   </a>
-                  .
                 </p>
               </Child>
               <Child />
