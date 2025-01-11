@@ -13,6 +13,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "@/public/logo.svg";
+import Circle from "@/public/circle.svg";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -63,12 +64,19 @@ const Header = () => {
   return (
     <Section>
       <Container className="flex items-center justify-between gap-4 text-xl">
-        <Link href="/" className="hover:opacity-75 transition-all">
+        <Link href="/" className="group">
           <Image
             src={Logo}
             width={36}
             height={29.31}
-            className="invert dark:invert-0"
+            className="hidden group-hover:block invert dark:invert-0"
+            alt="Bridger Logo"
+          />
+          <Image
+            src={Circle}
+            width={29.31}
+            height={29.31}
+            className="group-hover:hidden"
             alt="Bridger Logo"
           />
           <h3 className="sr-only">
