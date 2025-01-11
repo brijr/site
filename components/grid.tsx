@@ -48,7 +48,7 @@ export const Child = ({
   return (
     <div
       className={cn(
-        "p-0 -my-1 sm:min-h-32 border-x border-muted dark:border-muted/50",
+        "p-0 sm:min-h-32 border-x border-muted dark:border-muted/50",
         className
       )}
     >
