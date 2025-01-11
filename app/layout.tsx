@@ -62,7 +62,7 @@ export default function RootLayout({
 const Header = () => {
   return (
     <Section>
-      <Container className="flex items-center justify-between gap-4">
+      <Container className="flex items-center justify-between gap-4 text-xl">
         <Link href="/" className="hover:opacity-75 transition-all">
           <Image
             src={Logo}
@@ -77,12 +77,9 @@ const Header = () => {
         </Link>
 
         <div className="space-x-3">
-          <a className="link" target="_blank" href="https://github.com/brijr">
-            GitHub
-          </a>
-          <a className="link" target="_blank" href="https://x.com/bridgertower">
-            X.com
-          </a>
+          <Link href="/work">Work</Link>
+          <Link href="/posts">Posts</Link>
+          <a href="https://github.com/brijr">Github</a>
         </div>
       </Container>
     </Section>

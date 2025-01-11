@@ -9,7 +9,7 @@ export default function MarkdownLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className="text-lg tracking-tight leading-tight">
+    <main className="text-xl tracking-tight leading-tight">
       <Section>
         <Container>
           <Grid>

@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function HomePage() {
   return (
-    <main className="text-lg tracking-tight leading-tight">
+    <main className="text-xl tracking-tight leading-tight">
       <Section>
         <Container>
           <Grid>
@@ -27,7 +27,7 @@ export default function HomePage() {
                 </h3>
               </Child>
               <Child className="col-span-2">
-                <h4>
+                <h4 className="text-muted-foreground">
                   Currently, I work at{" "}
                   <a href="https://ampry.com" target="_blank">
                     Ampry
@@ -47,7 +47,7 @@ export default function HomePage() {
               <Child />
             </Row>
             <Row>
-              <Child className="col-span-2 flex flex-col">
+              <Child className="col-span-2 flex flex-col space-y-2 sm:space-y-0">
                 <p>
                   + <Link href="/work">View my work</Link>
                 </p>
@@ -55,33 +55,36 @@ export default function HomePage() {
                   + <Link href="/posts">Read my thoughts</Link>
                 </p>
               </Child>
-              <Child className="col-span-2 flex flex-col">
+              <Child className="col-span-2 flex flex-col text-muted-foreground">
                 <p>
-                  Subscribe on{" "}
+                  + Subscribe on{" "}
                   <a target="_blank" href="https://youtube.com/@bridgertower">
                     YouTube
                   </a>
                 </p>
                 <p>
-                  See my resume on{" "}
+                  + See my resume on{" "}
                   <a target="_blank" href="https://read.cv/brijr">
                     read.cv
                   </a>
                 </p>
                 <p>
-                  Follow me on{" "}
+                  + Follow me on{" "}
                   <a target="_blank" href="https://x.com/bridgertower">
                     x.com
                   </a>
                 </p>
               </Child>
             </Row>
+            <Row className="sm:hidden">
+              <Child />
+              <Child />
+              <Child />
+              <Child />
+            </Row>
             <Row>
               <Child className="col-span-3 text-muted-foreground">
-                <p>
-                  © Bridger Tower, 2025-Present,{" "}
-                  <Link href="/site">read about my site</Link>
-                </p>
+                <p>© Bridger Tower, 2025</p>
               </Child>
               <Child />
             </Row>
