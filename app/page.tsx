@@ -12,12 +12,15 @@ export default function HomePage() {
             <Row>
               <Child className="col-span-2">
                 <h1>Bridger Tower</h1>
-                <h2 className="text-muted-foreground">
+                <h2 className="sm:hidden text-muted-foreground">
                   Designer and Software Engineer
                 </h2>
               </Child>
-              <Child></Child>
-              <Child></Child>
+              <Child className="col-span-2">
+                <h2 className="hidden sm:block text-muted-foreground">
+                  Designer and Software Engineer
+                </h2>
+              </Child>
             </Row>
             <Row>
               <Child className="col-span-2">
@@ -83,9 +86,10 @@ export default function HomePage() {
               <Child />
             </Row>
             <Row>
-              <Child className="col-span-3 text-muted-foreground">
+              <Child className="col-span-2 text-muted-foreground">
                 <p>© Bridger Tower, 2025</p>
               </Child>
+              <Child />
               <Child />
             </Row>
           </Grid>
