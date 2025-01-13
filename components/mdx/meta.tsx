@@ -10,9 +10,11 @@ export function Meta({ title, description }: MetaProps) {
     <>
       <Row>
         <Child className="col-span-2">
-          <h1 className="!mt-0">{title}</h1>
+          <h1 className="text-3xl font-medium leading-none -mt-1 -ml-px">
+            {title}
+          </h1>
           {description && (
-            <p className="text-muted-foreground">{description}</p>
+            <p className="mt-2 sm:mt-1 text-muted-foreground">{description}</p>
           )}
         </Child>
         <Child />

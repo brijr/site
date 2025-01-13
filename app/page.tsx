@@ -11,8 +11,10 @@ export default function HomePage() {
           <Grid>
             <Row>
               <Child className="col-span-2">
-                <h1>Bridger Tower</h1>
-                <h2 className="text-muted-foreground">
+                <h1 className="text-3xl font-medium leading-none -mt-1 -ml-px">
+                  Bridger Tower
+                </h1>
+                <h2 className="text-muted-foreground mt-2 sm:mt-1">
                   Designer and Software Engineer
                 </h2>
               </Child>
