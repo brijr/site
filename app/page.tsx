@@ -96,10 +96,7 @@ export default function HomePage() {
               <Child className="col-span-2 text-muted-foreground">
                 <p>© Bridger Tower, 2025</p>
                 <p>
-                  Site based on{" "}
-                  <a href="https://designbooks.org/grid-system-in-graphic-design">
-                    grids
-                  </a>
+                  <Link href="/site">About my site</Link>
                 </p>
               </Child>
               <Child />
