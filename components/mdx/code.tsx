@@ -57,10 +57,7 @@ export function Code({
           getTokenProps,
         }) => (
           <pre
-            className={cn(
-              "overflow-x-auto rounded-lg bg-accent p-4 text-sm",
-              className
-            )}
+            className={cn("overflow-x-auto bg-accent p-4 text-sm", className)}
             style={style}
           >
             {tokens.map((line, i) => (
