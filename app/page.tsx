@@ -93,7 +93,7 @@ export default function HomePage() {
               <Child />
             </Row>
             <Row>
-              <Child className="col-span-3 text-muted-foreground">
+              <Child className="col-span-2 text-muted-foreground">
                 <p>© Bridger Tower, 2025</p>
                 <p>
                   Site based on{" "}
