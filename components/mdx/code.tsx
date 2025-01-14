@@ -34,7 +34,7 @@ export function Code({
         </span>
         <button
           onClick={copyToClipboard}
-          className="p-1.5 rounded-md transition-colors bg-accent border"
+          className="p-1.5 transition-colors bg-accent border"
           aria-label="Copy code"
         >
           {hasCopied ? (

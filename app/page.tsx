@@ -1,5 +1,6 @@
 import { Section, Container } from "@/components/craft";
 import { Grid, Row, Child } from "@/components/grid";
+import { EmailForm } from "@/components/forms/email-form";
 
 import Link from "next/link";
 
@@ -85,7 +86,14 @@ export default function HomePage() {
               <Child />
             </Row>
             <Row>
-              <Child className="col-span-2 text-muted-foreground">
+              <Child className="col-span-3">
+                <p>Subscribe for design related content</p>
+                <EmailForm />
+              </Child>
+              <Child />
+            </Row>
+            <Row>
+              <Child className="col-span-3 text-muted-foreground">
                 <p>© Bridger Tower, 2025</p>
                 <p>
                   Site based on{" "}
