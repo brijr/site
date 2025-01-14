@@ -58,7 +58,7 @@ export function Code({
         }) => (
           <pre
             className={cn(
-              "overflow-x-auto rounded-none bg-accent p-4 text-sm",
+              "overflow-x-auto !rounded-none bg-accent p-4 text-sm",
               className,
             )}
             style={style}
