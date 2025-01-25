@@ -14,58 +14,101 @@ export const metadata = {
 
 # Using Supabase with Payload CMS 3
 
-This guide walks you through how to integrate [Supabase](https://supabase.com/) with [Payload CMS 3](https://payloadcms.com/docs/). The goal is to keep it simple, direct, and show you the core ideas so you can extend them to your unique use-case.
+This guide walks you through how to integrate [Supabase](https://supabase.com/) with [Payload CMS 3](https://payloadcms.com/docs/). Payload 3.0 is now fully Next.js native, installing directly into your Next.js application with both the admin panel and backend living right in your app folder.
 
 ---
 
 ## Why Supabase + Payload CMS?
 
-- **Supabase** provides a Postgres database, authentication, storage, and more.  
-- **Payload CMS** is a TypeScript-based headless CMS that’s extensible, self-hosted, and easy to integrate with your existing stack.
+- **Supabase** provides a Postgres database, authentication, storage, and more.
+- **Payload CMS** is now the first truly Next.js-native CMS with built-in server components support, local API capabilities, and seamless integration with Next.js features.
 
 By using them together, you can:
 
 1. **Leverage Supabase Authentication** in Payload to manage your users and roles.
-2. **Use Supabase’s powerful database** for storing or reading data.
-3. **Take advantage of Supabase Storage** for files or media while Payload handles structured content.
+2. **Use Supabase's powerful PostgreSQL database** - Payload 3.0 now has stable PostgreSQL support with Vercel PostgreSQL adapters.
+3. **Take advantage of Supabase Storage** for files or media while Payload handles structured content with its new bulk upload capabilities.
+4. **Build high-performance applications** using Payload's server components and local API for the fastest possible data access.
+
+---
+
+## Key Features in Payload 3.0
+
+1. **Next.js Native Integration**
+
+   - Install directly into any Next.js app
+   - Full admin panel and backend in your app folder
+   - Deploy anywhere: serverless on Vercel, containers, or your preferred platform
+
+2. **Database Flexibility**
+
+   - Stable PostgreSQL support
+   - SQLite support
+   - Vercel PostgreSQL database adapters
+   - Powered by Drizzle ORM
+
+3. **Performance Optimizations**
+
+   - Server components and server functions support
+   - Local API for direct database access
+   - Selective loading with new Select and Populate APIs
+   - React compiler integration for better performance
+
+4. **Enhanced Content Management**
+   - Stable Lexical rich text editor with inline and block components
+   - Built-in jobs queue for task automation
+   - Bulk upload support
+   - Live Preview with server component support
 
 ---
 
 ## Prerequisites
 
 1. **Node.js** (v16+)
-2. **Payload CMS v3** (installed locally)
-3. **Supabase Project** (set up in your [Supabase dashboard](https://app.supabase.com/))
+2. **Next.js** (App Router)
+3. **Payload CMS v3** (installed via `create-payload-app` or added to existing Next.js project)
+4. **Supabase Project** (set up in your [Supabase dashboard](https://app.supabase.com/))
 
 ---
 
-## 1. Set Up Your Supabase Project
+## 1. Set Up Your Project
 
-If you don’t have a Supabase project yet:
+1. If starting from scratch, create a new Next.js project with Payload:
 
-1. Go to [app.supabase.com](https://app.supabase.com/) and create a new project.
-2. Save your Supabase project credentials:
-   - **Project URL** (often called `supabaseUrl`)
-   - **API Key** (often called `supabaseKey` or `anonKey`)
+   ```bash
+   pnpm create payload-app
+   ```
 
-You’ll need these values to configure the Supabase client in Payload.
+   Select the Website template to get started with server components and Tailwind CSS.
+
+2. If adding to an existing Next.js project:
+
+   ```bash
+   pnpm add payload
+   ```
+
+3. Set up your Supabase project:
+   - Go to [app.supabase.com](https://app.supabase.com/) and create a new project
+   - Save your credentials:
+     - **Project URL** (often called `supabaseUrl`)
+     - **API Key** (often called `supabaseKey` or `anonKey`)
 
 ---
 
 ## 2. Initialize Your Payload CMS 3 Project
 
-If you haven’t already installed Payload, you can do so by running:
+If you haven't already installed Payload, you can do so by running:
 
 ```bash
-npx create-payload-app my-payload-app
+pnpm create payload-app my-payload-app
 ```
 
-Follow the prompts to choose your configuration. Once it’s set up:
+Follow the prompts to choose your configuration. Once it's set up:
 
 ```bash
 cd my-payload-app
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 By default, your local Payload CMS runs at `http://localhost:3000/admin`.
@@ -74,10 +117,10 @@ By default, your local Payload CMS runs at `http://localhost:3000/admin`.
 
 ## 3. Install the Supabase Client
 
-Within your Payload project, install Supabase’s JavaScript client:
+Within your Payload project, install Supabase's JavaScript client:
 
 ```bash
-npm install @supabase/supabase-js
+pnpm install @supabase/supabase-js
 ```
 
 ---
@@ -88,10 +131,10 @@ Create a helper module (e.g. `supabaseClient.ts` or `supabaseClient.js`) to conf
 
 ```ts
 // supabaseClient.ts
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = process.env.SUPABASE_URL || '';
-const supabaseKey = process.env.SUPABASE_ANON_KEY || '';
+const supabaseUrl = process.env.SUPABASE_URL || "";
+const supabaseKey = process.env.SUPABASE_ANON_KEY || "";
 
 export const supabase = createClient(supabaseUrl, supabaseKey);
 ```
@@ -114,30 +157,30 @@ A common scenario might be using Supabase whenever a new document is created or 
 
 ```ts
 // payload.config.ts
-import { buildConfig } from 'payload/config';
-import { supabase } from './supabaseClient';
+import { buildConfig } from "payload/config";
+import { supabase } from "./supabaseClient";
 
 export default buildConfig({
   // ...rest of your Payload config
   collections: [
     {
-      slug: 'users',
+      slug: "users",
       fields: [
         {
-          name: 'email',
-          type: 'email',
-          required: true
+          name: "email",
+          type: "email",
+          required: true,
         },
         {
-          name: 'password',
-          type: 'text',
-          required: true
-        }
+          name: "password",
+          type: "text",
+          required: true,
+        },
       ],
       hooks: {
         afterChange: [
           async ({ operation, doc }) => {
-            if (operation === 'create') {
+            if (operation === "create") {
               // Create a user in Supabase
               const { email, password } = doc;
               const { error } = await supabase.auth.signUp({
@@ -146,12 +189,15 @@ export default buildConfig({
               });
 
               if (error) {
-                console.error('Error creating user in Supabase:', error.message);
+                console.error(
+                  "Error creating user in Supabase:",
+                  error.message
+                );
               }
             }
-          }
-        ]
-      }
+          },
+        ],
+      },
     },
   ],
 });
@@ -168,17 +214,17 @@ Suppose you want to leverage Supabase Storage to host images or files. You could
 
 ```ts
 // payload.config.ts
-import { supabase } from './supabaseClient';
+import { supabase } from "./supabaseClient";
 
 export default buildConfig({
   collections: [
     {
-      slug: 'media',
+      slug: "media",
       fields: [
         {
-          name: 'file',
-          type: 'upload',
-          relationTo: 'media-files',
+          name: "file",
+          type: "upload",
+          relationTo: "media-files",
         },
       ],
       hooks: {
@@ -188,17 +234,20 @@ export default buildConfig({
             if (fileData) {
               // This could be the file buffer, filename, etc.
               const fileBuffer = fileData?.buffer;
-              const fileName = fileData?.filename || 'payload-upload';
+              const fileName = fileData?.filename || "payload-upload";
 
               // Upload to Supabase Storage
               const { error } = await supabase.storage
-                .from('your-bucket-name')
+                .from("your-bucket-name")
                 .upload(`images/${fileName}`, fileBuffer);
 
               if (error) {
-                console.error('Error uploading file to Supabase:', error.message);
+                console.error(
+                  "Error uploading file to Supabase:",
+                  error.message
+                );
               } else {
-                console.log('File uploaded successfully to Supabase!');
+                console.log("File uploaded successfully to Supabase!");
               }
             }
           },
@@ -209,14 +258,14 @@ export default buildConfig({
 });
 ```
 
-Adapt this to your actual file handling strategy. Payload’s `upload` fields can be configured to store locally or elsewhere before you sync it to Supabase.
+Adapt this to your actual file handling strategy. Payload's `upload` fields can be configured to store locally or elsewhere before you sync it to Supabase.
 
 ---
 
 ## 7. Authentication Considerations
 
-1. **Using Supabase Auth for the Payload Admin**: Payload has its own auth, but you could offload user management to Supabase. In that case, you’d integrate or override Payload’s auth logic with Supabase.
-2. **JWT vs. Session**: Payload uses JWT-based authentication. Supabase also uses JWT under the hood with additional helpers. Make sure you handle tokens securely if you’re bridging the two systems.
+1. **Using Supabase Auth for the Payload Admin**: Payload has its own auth, but you could offload user management to Supabase. In that case, you'd integrate or override Payload's auth logic with Supabase.
+2. **JWT vs. Session**: Payload uses JWT-based authentication. Supabase also uses JWT under the hood with additional helpers. Make sure you handle tokens securely if you're bridging the two systems.
 
 ---
 
@@ -231,16 +280,16 @@ Adapt this to your actual file handling strategy. Payload’s `upload` fields ca
 ## Next Steps
 
 - **Explore Payload Plugins**: You could build a dedicated Payload plugin to encapsulate your Supabase integration.
-- **Fine-Tune Hooks**: Payload’s hooks are very flexible—use them to integrate Supabase logic exactly where you need it.
+- **Fine-Tune Hooks**: Payload's hooks are very flexible—use them to integrate Supabase logic exactly where you need it.
 - **Consider Real-Time**: Supabase provides real-time capabilities. You could push real-time updates from Supabase into your Payload front-end or use webhooks that update Payload content.
 
 ---
 
 ## Conclusion
 
-That’s it! By combining Supabase and Payload CMS 3, you have a flexible, powerful system for data storage, user management, and file uploads. The best part is that both are straightforward once you get the hang of them.
+That's it! By combining Supabase and Payload CMS 3, you have a flexible, powerful system for data storage, user management, and file uploads. The best part is that both are straightforward once you get the hang of them.
 
-Feel free to adapt the examples above to fit your exact use-case. Let me know if you have any questions—I’m happy to help. Keep building awesome stuff!
+Feel free to adapt the examples above to fit your exact use-case. Let me know if you have any questions—I'm happy to help. Keep building awesome stuff!
 
 **Happy coding!**
 
