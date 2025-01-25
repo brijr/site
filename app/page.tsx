@@ -32,11 +32,11 @@ export default function HomePage() {
               <Child className="col-span-2">
                 <h4 className="text-muted-foreground">
                   Currently, I work at{" "}
-                  <a href="https://ampry.com" target="_blank">
+                  <a href="https://ampry.com" target="_blank" rel="noreferrer">
                     Ampry
                   </a>{" "}
                   and{" "}
-                  <a href="https://9d8.dev" target="_blank">
+                  <a href="https://9d8.dev" target="_blank" rel="noreferrer">
                     9d8
                   </a>{" "}
                   building marketing and sales software.
@@ -61,19 +61,31 @@ export default function HomePage() {
               <Child className="col-span-2 flex flex-col text-muted-foreground">
                 <p>
                   + Follow me on{" "}
-                  <a target="_blank" href="https://x.com/bridgertower">
+                  <a
+                    target="_blank"
+                    rel="noreferrer"
+                    href="https://x.com/bridgertower"
+                  >
                     x.com
                   </a>
                 </p>
                 <p>
                   + Subscribe on{" "}
-                  <a target="_blank" href="https://youtube.com/@bridgertower">
+                  <a
+                    target="_blank"
+                    rel="noreferrer"
+                    href="https://youtube.com/@bridgertower"
+                  >
                     youtube.com
                   </a>
                 </p>
                 <p>
                   + See my resume on{" "}
-                  <a target="_blank" href="https://read.cv/brijr">
+                  <a
+                    target="_blank"
+                    rel="noreferrer"
+                    href="https://read.cv/brijr"
+                  >
                     read.cv
                   </a>
                 </p>
