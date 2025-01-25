@@ -1,3 +1,5 @@
+import type React from 'react';
+
 export interface PageMeta {
   title: string;
   description?: string;
@@ -13,9 +15,9 @@ export interface MDXPage {
 }
 
 export function formatDate(date: string) {
-  return new Date(date).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
+  return new Date(date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
   });
 }

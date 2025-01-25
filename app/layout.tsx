@@ -1,32 +1,32 @@
-import "./globals.css";
+import './globals.css';
 
-import type { Metadata } from "next";
-import { Inter as FontSans } from "next/font/google";
-import { Layout } from "@/components/craft";
-import { ThemeProvider } from "@/components/theme/theme-provider";
-import { ThemeToggle } from "@/components/theme/theme-toggle";
-import { Analytics } from "@vercel/analytics/next";
-import { Toaster } from "sonner";
-import { Section, Container } from "@/components/craft";
-import { cn } from "@/lib/utils";
+import type { Metadata } from 'next';
+import { Inter as FontSans } from 'next/font/google';
+import { Layout } from '@/components/craft';
+import { ThemeProvider } from '@/components/theme/theme-provider';
+import { ThemeToggle } from '@/components/theme/theme-toggle';
+import { Analytics } from '@vercel/analytics/next';
+import { Toaster } from 'sonner';
+import { Section, Container } from '@/components/craft';
+import { cn } from '@/lib/utils';
 
-import Image from "next/image";
-import Link from "next/link";
-import Logo from "@/public/logo.svg";
-import Circle from "@/public/circle.svg";
+import Image from 'next/image';
+import Link from 'next/link';
+import Logo from '@/public/logo.svg';
+import Circle from '@/public/circle.svg';
 
 const fontSans = FontSans({
-  subsets: ["latin"],
-  variable: "--font-sans",
+  subsets: ['latin'],
+  variable: '--font-sans',
 });
 
 export const metadata: Metadata = {
-  title: "Bridger Tower / Designer and Software Engineer",
+  title: 'Bridger Tower / Designer and Software Engineer',
   description:
-    "Bridger is a Design Engineer exploring user interface design, applied artificial intelligence, and human computer interaction.",
-  metadataBase: new URL("https://bridger.to"),
+    'Bridger is a Design Engineer exploring user interface design, applied artificial intelligence, and human computer interaction.',
+  metadataBase: new URL('https://bridger.to'),
   alternates: {
-    canonical: "/",
+    canonical: '/',
   },
 };
 
@@ -39,7 +39,7 @@ export default function RootLayout({
     <Layout>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased w-screen overflow-x-hidden",
+          'min-h-screen bg-background font-sans antialiased w-screen overflow-x-hidden',
           fontSans.variable
         )}
       >

@@ -1,8 +1,8 @@
-import { Section, Container } from "@/components/craft";
-import { Grid, Row, Child } from "@/components/grid";
-import { EmailForm } from "@/components/forms/email-form";
+import { Section, Container } from '@/components/craft';
+import { Grid, Row, Child } from '@/components/grid';
+import { EmailForm } from '@/components/forms/email-form';
 
-import Link from "next/link";
+import Link from 'next/link';
 
 export default function HomePage() {
   return (
@@ -31,14 +31,14 @@ export default function HomePage() {
               </Child>
               <Child className="col-span-2">
                 <h4 className="text-muted-foreground">
-                  Currently, I work at{" "}
+                  Currently, I work at{' '}
                   <a href="https://ampry.com" target="_blank" rel="noreferrer">
                     Ampry
-                  </a>{" "}
-                  and{" "}
+                  </a>{' '}
+                  and{' '}
                   <a href="https://9d8.dev" target="_blank" rel="noreferrer">
                     9d8
-                  </a>{" "}
+                  </a>{' '}
                   building marketing and sales software.
                 </h4>
               </Child>
@@ -60,7 +60,7 @@ export default function HomePage() {
               </Child>
               <Child className="col-span-2 flex flex-col text-muted-foreground">
                 <p>
-                  + Follow me on{" "}
+                  + Follow me on{' '}
                   <a
                     target="_blank"
                     rel="noreferrer"
@@ -70,7 +70,7 @@ export default function HomePage() {
                   </a>
                 </p>
                 <p>
-                  + Subscribe on{" "}
+                  + Subscribe on{' '}
                   <a
                     target="_blank"
                     rel="noreferrer"
@@ -80,7 +80,7 @@ export default function HomePage() {
                   </a>
                 </p>
                 <p>
-                  + See my resume on{" "}
+                  + See my resume on{' '}
                   <a
                     target="_blank"
                     rel="noreferrer"
