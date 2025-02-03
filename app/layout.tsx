@@ -69,7 +69,7 @@ const Header = () => {
             src={Logo}
             width={36}
             height={29.31}
-            className="hover:opacity-75 invert dark:invert-0"
+            className="hidden group-hover:block invert dark:invert-0"
             alt="Bridger Logo"
           />
           <h3 className="sr-only">
