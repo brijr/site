@@ -40,7 +40,7 @@ export default function RootLayout({
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased w-screen overflow-x-hidden",
-          fontSans.variable
+          fontSans.variable,
         )}
       >
         <ThemeProvider
@@ -70,6 +70,13 @@ const Header = () => {
             width={36}
             height={29.31}
             className="hidden group-hover:block invert dark:invert-0"
+            alt="Bridger Logo"
+          />
+          <Image
+            src={Circle}
+            width={36}
+            height={29.31}
+            className="group-hover:hidden"
             alt="Bridger Logo"
           />
           <h3 className="sr-only">
