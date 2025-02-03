@@ -74,7 +74,7 @@ const Header = () => {
           />
           <Image
             src={Circle}
-            width={36}
+            width={29.31}
             height={29.31}
             className="group-hover:hidden"
             alt="Bridger Logo"
