@@ -102,7 +102,7 @@ export function middleware(request: NextRequest) {
   // Redirect if there is no locale
   if (pathnameIsMissingLocale) {
     const locale = getLocale(request);
-    
+
     // For default locale (en), keep URLs clean without prefix
     if (locale === DEFAULT_LOCALE) {
       return NextResponse.rewrite(
@@ -169,28 +169,15 @@ In your pages, you can now access the current language through the `params` prop
 
 ```tsx
 // app/[lang]/page.tsx
-import { getPayload } from "payload";
-
+// You now have access to the current locale
+// e.g. /en-US/products -> `lang` is "en-US"
 export default async function Page({
-  params: { lang },
+  params,
 }: {
-  params: { lang: string };
+  params: Promise<{ lang: string }>
 }) {
-  const payload = await getPayload();
-  const {
-    docs: [data],
-  } = await payload.find({
-    collection: "pages",
-    where: { slug: "learn" },
-    locale: lang,
-  });
-
-  return (
-    <div>
-      <h1>{data.title}</h1>
-      <div>{data.content}</div>
-    </div>
-  );
+  const lang = (await params).lang;
+  return ...
 }
 ```
 
@@ -207,7 +194,7 @@ import { usePathname } from "next/navigation";
 
 export function LanguageSwitcher() {
   const pathname = usePathname();
-  
+
   // Remove the current locale from the pathname
   const pathnameWithoutLocale = pathname.replace(/^\/(?:en|ja)/, "") || "/";
 
