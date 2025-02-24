@@ -1,0 +1,184 @@
+import { ThemeToggle } from "@/components/theme/theme-toggle";
+import { Meta } from "@/components/mdx/meta";
+import { PostWrapper } from "@/components/mdx/post-wrapper";
+
+export const metadata = {
+  title: "Setting Up Localization with Payload",
+  description: "Learn how to set up localization with Payload 3 and Next.js 15",
+};
+
+<Meta {...metadata} className="mb-8" />
+
+<PostWrapper>
+
+Are you building a multilingual website with Payload CMS and Next.js? This guide will walk you through creating a clean localization setup where English pages use clean URLs (like `/about`) while other languages use prefixed routes (like `/ja/about`).
+
+## The Localization Challenge
+
+Building multilingual websites involves two key challenges:
+
+- Managing translated content efficiently
+- Creating a logical URL structure for different languages
+
+Fortunately, Payload CMS 3 and Next.js 15 offer powerful localization features that work seamlessly together. Let's see how to implement them.
+
+## Configuring Payload CMS for Multiple Languages
+
+First, you'll need to update your `payload.config.ts` file to support your desired languages:
+
+```typescript
+import { buildConfig } from "payload/config";
+
+export default buildConfig({
+  localization: {
+    locales: ["en", "ja"],
+    defaultLocale: "en",
+  },
+  // Your collections with localized fields
+  collections: [
+    {
+      slug: "pages",
+      fields: [
+        {
+          name: "slug",
+          type: "text",
+          required: true,
+          unique: true,
+          // Note: NOT localized to keep URLs consistent
+        },
+        {
+          name: "title",
+          type: "text",
+          localized: true,
+        },
+        {
+          name: "content",
+          type: "richText",
+          localized: true,
+        },
+      ],
+    },
+  ],
+});
+```
+
+### Key Points:
+
+- **Locales array**: List all languages you want to support
+- **Default locale**: Set English as the default
+- **Field-level localization**: Mark fields like `title` and `content` as `localized: true`
+- **Keep slugs non-localized**: This ensures consistent URLs across languages
+
+## Setting Up Next.js for International Routing
+
+Next, configure your `next.config.js` file to handle language-based routing:
+
+```javascript
+module.exports = {
+  i18n: {
+    locales: ["en", "ja"],
+    defaultLocale: "en",
+  },
+};
+```
+
+With this setup, Next.js automatically handles routes for you:
+
+- English pages: `/about`, `/about`, etc.
+- Japanese pages: `/ja/about`, `/ja/about`, etc.
+
+## Fetching Localized Content
+
+Now, in your Next.js pages, you'll need to fetch content based on the current language:
+
+```tsx
+import { useRouter } from "next/router";
+import { getPayload } from "payload";
+
+export default async function Page() {
+  // Get the current language from the URL
+  const router = useRouter();
+  const { locale } = router;
+
+  // Fetch content in the correct language
+  const payload = await getPayload();
+  const {
+    docs: [data],
+  } = await payload.find({
+    collection: "pages",
+    where: { slug: "learn" },
+    locale, // Pass the current locale to Payload
+  });
+
+  // Render the localized content
+  return (
+    <div>
+      <h1>{data.title}</h1>
+      <div>{data.content}</div>
+    </div>
+  );
+}
+```
+
+This approach:
+
+1. Determines the current language from the URL
+2. Fetches content from Payload in that language
+3. Displays the localized content to the user
+
+## Pro Tips for Better Localization
+
+### Automatic Fallbacks
+
+Payload CMS has a handy feature: if a translation is missing for a specific field, it automatically falls back to the default language. This means you can gradually translate your site without worrying about missing content.
+
+### Language Switching
+
+To add a language switcher, you can use Next.js's `Link` component with the `locale` prop:
+
+```tsx
+import Link from "next/link";
+import { useRouter } from "next/router";
+
+export function LanguageSwitcher() {
+  const router = useRouter();
+
+  return (
+    <div>
+      <Link href={router.asPath} locale="en">
+        English
+      </Link>
+      <Link href={router.asPath} locale="ja">
+        日本語
+      </Link>
+    </div>
+  );
+}
+```
+
+### Testing Your Setup
+
+After implementation, test thoroughly:
+
+- Create content in different languages in Payload
+- Visit your routes (both default and localized)
+- Check that the correct content appears
+- Test language switching
+
+## Common Pitfalls to Avoid
+
+- **Localizing slugs**: Keep slugs non-localized to maintain URL consistency
+- **Missing translations**: Ensure critical content is translated in all languages
+- **Hard-coded text**: Move all UI text to localized fields
+
+## That's It!
+
+Setting up localization with Payload CMS and Next.js gives you a powerful, flexible system for managing multilingual content. The clean URL structure (with English as the default route and language prefixes for others) provides an excellent user experience while keeping your content management straightforward.
+
+By leveraging Payload's field-level localization and Next.js's routing capabilities, you can create a truly global website without the complexity that typically comes with multilingual setups.
+
+---
+
+Need more help? Check the official documentation for [Payload CMS Localization](https://payloadcms.com/docs/configuration/localization) and [Next.js Internationalization](https://nextjs.org/docs/app/building-your-application/routing/internationalization).
+
+</PostWrapper>
