@@ -165,23 +165,126 @@ export default function RootLayout({
 
 ## Fetching Localized Content
 
-In your pages, you can now access the current language through the `params` prop:
+### Using Payload CMS
+
+In your pages, you can access the current language through the `params` prop:
 
 ```tsx
 // app/[lang]/page.tsx
-// You now have access to the current locale
-// e.g. /en-US/products -> `lang` is "en-US"
+import { getPayload } from "payload";
+
 export default async function Page({
   params,
-}: {
-  params: Promise<{ lang: string }>
-}) {
+}: Readonly<{
+  params: Promise<{ lang: string }>;
+}>) {
   const lang = (await params).lang;
-  return ...
+  const payload = await getPayload();
+  const {
+    docs: [data],
+  } = await payload.find({
+    collection: "pages",
+    where: { slug: "learn" },
+    locale: lang,
+  });
+
+  return (
+    <div>
+      <h1>{data.title}</h1>
+      <div>{data.content}</div>
+    </div>
+  );
 }
 ```
 
-### Language Switching
+### Dictionary-based UI Translations
+
+For UI elements that aren't managed by Payload CMS, you can use a dictionary-based approach:
+
+```typescript
+// app/dictionaries/en.json
+{
+  "common": {
+    "readMore": "Read More",
+    "back": "Back to Home"
+  }
+}
+
+// app/dictionaries/ja.json
+{
+  "common": {
+    "readMore": "続きを読む",
+    "back": "ホームに戻る"
+  }
+}
+```
+
+Create a utility function to load the translations:
+
+```typescript
+// app/lib/dictionary.ts
+import "server-only";
+
+const dictionaries = {
+  en: () => import("../dictionaries/en.json").then((module) => module.default),
+  ja: () => import("../dictionaries/ja.json").then((module) => module.default),
+};
+
+export const getDictionary = async (locale: "en" | "ja") =>
+  dictionaries[locale]();
+```
+
+Use the dictionary in your components:
+
+```typescript
+// app/[lang]/components/LocalizedUI.tsx
+import { getDictionary } from "@/lib/dictionary";
+
+export default async function LocalizedUI({
+  params,
+}: Readonly<{
+  params: Promise<{ lang: "en" | "ja" }>;
+}>) {
+  const lang = (await params).lang;
+  const dict = await getDictionary(lang);
+
+  return (
+    <div>
+      <a href="#">{dict.common.readMore}</a>
+      <a href="/">{dict.common.back}</a>
+    </div>
+  );
+}
+```
+
+### Static Generation
+
+To generate static routes for all supported languages, use `generateStaticParams` in your root layout:
+
+```typescript
+// app/[lang]/layout.tsx
+export async function generateStaticParams() {
+  return [{ lang: "en" }, { lang: "ja" }];
+}
+
+export default async function RootLayout({
+  children,
+  params,
+}: Readonly<{
+  children: React.ReactNode;
+  params: Promise<{ lang: "en" | "ja" }>;
+}>) {
+  return (
+    <html lang={(await params).lang}>
+      <body>{children}</body>
+    </html>
+  );
+}
+```
+
+This will pre-generate pages for both English and Japanese at build time, improving performance.
+
+## Language Switching
 
 Create a language switcher component that works with the App Router:
 
