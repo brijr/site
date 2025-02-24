@@ -71,46 +71,120 @@ export default buildConfig({
 
 ## Setting Up Next.js for International Routing
 
-Next, configure your `next.config.js` file to handle language-based routing:
+With Next.js App Router, internationalization is handled through middleware and dynamic route parameters. First, create a middleware file to handle language detection and routing:
 
-```javascript
-module.exports = {
-  i18n: {
-    locales: ["en", "ja"],
-    defaultLocale: "en",
-  },
+```typescript
+// middleware.ts
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { match } from "@formatjs/intl-localematcher";
+import Negotiator from "negotiator";
+
+const LOCALES = ["en", "ja"];
+const DEFAULT_LOCALE = "en";
+
+function getLocale(request: NextRequest): string {
+  const negotiatorHeaders: Record<string, string> = {};
+  request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
+
+  // @ts-ignore locales are readonly
+  const languages = new Negotiator({ headers: negotiatorHeaders }).languages();
+  const locale = match(languages, LOCALES, DEFAULT_LOCALE);
+  return locale;
+}
+
+export function middleware(request: NextRequest) {
+  const pathname = request.nextUrl.pathname;
+  const pathnameIsMissingLocale = LOCALES.every(
+    (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
+  );
+
+  // Redirect if there is no locale
+  if (pathnameIsMissingLocale) {
+    const locale = getLocale(request);
+    
+    // For default locale (en), keep URLs clean without prefix
+    if (locale === DEFAULT_LOCALE) {
+      return NextResponse.rewrite(
+        new URL(
+          `/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`,
+          request.url
+        )
+      );
+    }
+
+    // For other locales, redirect to add the locale prefix
+    return NextResponse.redirect(
+      new URL(
+        `/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`,
+        request.url
+      )
+    );
+  }
+}
+
+export const config = {
+  matcher: [
+    // Skip all internal paths (_next)
+    "/((?!api|_next/static|_next/image|favicon.ico).*)",
+  ],
 };
 ```
 
-With this setup, Next.js automatically handles routes for you:
+Then, structure your app directory to handle localized routes:
 
-- English pages: `/about`, `/about`, etc.
-- Japanese pages: `/ja/about`, `/ja/about`, etc.
+```text
+app/
+  [lang]/
+    layout.tsx
+    page.tsx
+    about/
+      page.tsx
+    blog/
+      page.tsx
+```
+
+Your root layout can now access the current locale:
+
+```typescript
+// app/[lang]/layout.tsx
+export default function RootLayout({
+  children,
+  params: { lang },
+}: {
+  children: React.ReactNode;
+  params: { lang: string };
+}) {
+  return (
+    <html lang={lang}>
+      <body>{children}</body>
+    </html>
+  );
+}
+```
 
 ## Fetching Localized Content
 
-Now, in your Next.js pages, you'll need to fetch content based on the current language:
+In your pages, you can now access the current language through the `params` prop:
 
 ```tsx
-import { useRouter } from "next/router";
+// app/[lang]/page.tsx
 import { getPayload } from "payload";
 
-export default async function Page() {
-  // Get the current language from the URL
-  const router = useRouter();
-  const { locale } = router;
-
-  // Fetch content in the correct language
+export default async function Page({
+  params: { lang },
+}: {
+  params: { lang: string };
+}) {
   const payload = await getPayload();
   const {
     docs: [data],
   } = await payload.find({
     collection: "pages",
     where: { slug: "learn" },
-    locale, // Pass the current locale to Payload
+    locale: lang,
   });
 
-  // Render the localized content
   return (
     <div>
       <h1>{data.title}</h1>
@@ -120,11 +194,35 @@ export default async function Page() {
 }
 ```
 
-This approach:
+### Language Switching
 
-1. Determines the current language from the URL
-2. Fetches content from Payload in that language
-3. Displays the localized content to the user
+Create a language switcher component that works with the App Router:
+
+```tsx
+// components/LanguageSwitcher.tsx
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+export function LanguageSwitcher() {
+  const pathname = usePathname();
+  
+  // Remove the current locale from the pathname
+  const pathnameWithoutLocale = pathname.replace(/^\/(?:en|ja)/, "") || "/";
+
+  return (
+    <div>
+      <Link href={pathnameWithoutLocale} locale={false}>
+        English
+      </Link>
+      <Link href={`/ja${pathnameWithoutLocale}`} locale={false}>
+        日本語
+      </Link>
+    </div>
+  );
+}
+```
 
 ## Pro Tips for Better Localization
 
