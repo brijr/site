@@ -34,28 +34,23 @@ This guide demonstrates how to integrate Cloudflare R2 with Payload CMS for effi
 ### 1. Install Required Dependencies
 
 ```bash
-# Using npm
-npm install @payloadcms/storage-s3
-
-# Using yarn
-yarn add @payloadcms/storage-s3
-
-# Using pnpm
-pnpm add @payloadcms/storage-s3
+pnpm add @payloadcms/storage-s3 @aws-sdk/client-s3
 ```
 
 ### 2. Configure R2 in Cloudflare
 
-1. Navigate to Cloudflare Dashboard
-2. Select "R2" from the sidebar
-3. Create a new bucket:
+1. Navigate to Cloudflare Dashboard > R2
+2. Create a new bucket:
    - Click "Create bucket"
    - Enter a unique bucket name
    - Choose your preferred region
-4. Generate API credentials:
+3. Generate API credentials:
    - Go to "R2 > Manage R2 API Tokens"
    - Click "Create API Token"
-   - Select "Admin Read & Write" permissions
+   - Select permissions:
+     - "Object Read" for read-only access
+     - "Object Write" for upload capabilities
+     - Both for full access
    - Save your credentials securely
 
 ### 3. Set Up Environment Variables
@@ -67,7 +62,8 @@ Create or update your .env file:
 R2_ACCESS_KEY_ID=your_access_key_id
 R2_SECRET_ACCESS_KEY=your_secret_access_key
 R2_BUCKET=your_bucket_name
-R2_ENDPOINT=https://<account_id>.r2.cloudflarestorage.com
+R2_ACCOUNT_ID=your_account_id
+R2_ENDPOINT=https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com
 ```
 
 ### 4. Configure Payload CMS
@@ -77,63 +73,105 @@ Update your payload.config.ts:
 ```typescript
 import { buildConfig } from "payload/config";
 import { s3Storage } from "@payloadcms/storage-s3";
+import path from "path";
+
+const storage = s3Storage({
+  collections: {
+    media: {
+      adapter: "s3", // Required
+      disableLocalStorage: true, // Recommended for production
+      prefix: "media", // Optional prefix for uploaded files
+      generateFileURL: ({ filename, prefix }) =>
+        `https://<your-bucket>.<your-domain>/${prefix}/${filename}`, // Optional
+    },
+  },
+  bucket: process.env.R2_BUCKET,
+  config: {
+    endpoint: process.env.R2_ENDPOINT,
+    credentials: {
+      accessKeyId: process.env.R2_ACCESS_KEY_ID,
+      secretAccessKey: process.env.R2_SECRET_ACCESS_KEY,
+    },
+    region: "auto", // Required for R2
+    forcePathStyle: true, // Required for R2
+  },
+});
 
 export default buildConfig({
-  plugins: [
-    s3Storage({
-      collections: {
-        media: {
-          adapter: "s3",
-          disableLocalStorage: true, // Optional: disable local storage
-          prefix: "media", // Optional: prefix all files with this path
+  admin: {
+    // Your admin config
+  },
+  collections: [
+    {
+      slug: "media",
+      upload: {
+        staticDir: path.resolve(__dirname, "../media"),
+        // Image sizes are processed locally before upload
+        imageSizes: [
+          {
+            name: "thumbnail",
+            width: 400,
+            height: 300,
+            position: "centre",
+          },
+          {
+            name: "card",
+            width: 768,
+            height: 1024,
+            position: "centre",
+          },
+        ],
+        formatOptions: {
+          format: "webp", // Convert uploads to WebP
+          options: {
+            quality: 80,
+          },
         },
       },
-      bucket: process.env.R2_BUCKET!,
-      config: {
-        endpoint: process.env.R2_ENDPOINT!,
-        credentials: {
-          accessKeyId: process.env.R2_ACCESS_KEY_ID!,
-          secretAccessKey: process.env.R2_SECRET_ACCESS_KEY!,
-        },
-        region: "auto",
-        forcePathStyle: true,
-      },
-    }),
+      fields: [], // Add custom fields as needed
+    },
   ],
+  plugins: [storage],
 });
 ```
 
-### 5. Media Collection Configuration
+### 5. Public Access Configuration
 
-Configure your media collection to work with R2:
+To make your R2 bucket publicly accessible, you have two options:
+
+1. **Using Cloudflare Workers** (Recommended):
 
 ```typescript
-import { CollectionConfig } from "payload/types";
+// worker.js
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+    const objectKey = url.pathname.slice(1); // Remove leading slash
 
-export const Media: CollectionConfig = {
-  slug: "media",
-  upload: {
-    staticURL: "/media",
-    staticDir: "media",
-    mimeTypes: ["image/*", "application/pdf"], // Customize as needed
-    imageSizes: [
-      {
-        name: "thumbnail",
-        width: 400,
-        height: 300,
-        position: "centre",
-      },
-      {
-        name: "card",
-        width: 768,
-        height: 1024,
-        position: "centre",
-      },
-    ],
+    try {
+      const object = await env.MY_BUCKET.get(objectKey);
+
+      if (!object) {
+        return new Response("Object Not Found", { status: 404 });
+      }
+
+      const headers = new Headers();
+      object.writeHttpMetadata(headers);
+      headers.set("etag", object.httpEtag);
+
+      return new Response(object.body, {
+        headers,
+      });
+    } catch (error) {
+      return new Response("Internal Error", { status: 500 });
+    }
   },
-  fields: [], // Add custom fields as needed
 };
 ```
+
+2. **Using Public Bucket** (Simpler but less control):
+   - Enable public access in R2 bucket settings
+   - Update your generateFileURL config to use the public bucket URL
 
 ## Advanced Configuration
 
