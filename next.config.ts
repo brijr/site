@@ -33,6 +33,11 @@ const nextConfig: NextConfig = {
         destination: "https://github.com/brijr",
         permanent: true,
       },
+      {
+        source: "/30",
+        destination: "https://cal.com/brijr/30min",
+        permanent: true,
+      },
     ];
   },
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
