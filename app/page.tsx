@@ -26,7 +26,7 @@ export default function HomePage() {
               <Child className="col-span-2">
                 <h3>
                   UI design, applied artificial intelligence, and human-computer
-                  interaction.
+                  interaction. Background in marketing and advertising.
                 </h3>
               </Child>
               <Child className="col-span-2">
