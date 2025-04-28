@@ -43,7 +43,7 @@ export default function HomePage() {
                   <a href="https://9d8.dev" target="_blank" rel="noreferrer">
                     9d8
                   </a>{" "}
-                  building marketing and sales software.
+                  designing and building software.
                 </h4>
               </Child>
             </Row>
