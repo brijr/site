@@ -133,12 +133,16 @@ html.lenis body {
 
 For **App Router** ([Next.js 13+](https://nextjs.org/docs/app)):
 
-```jsx
-// app/layout.js
+```tsx
+// app/layout.tsx
 import { LenisProvider } from "@/components/providers/lenis-provider";
 import "./globals.css";
 
-export default function RootLayout({ children }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <body>
@@ -217,15 +221,23 @@ const lenis = new Lenis({
 Recent versions handle anchor links automatically when `anchors: true` is set:
 
 ```jsx
-// components/ScrollToButton.jsx
+// components/ScrollToButton.tsx
 "use client";
 
-import { useLenis } from "@/components/LenisContext";
+import { useLenis } from "@/components/providers/lenis-provider";
 
-export default function ScrollToButton({ target, children, options = {} }) {
+export default function ScrollToButton({
+  target,
+  children,
+  options = {},
+}: {
+  target: string,
+  children: React.ReactNode,
+  options?: LenisOptions,
+}) {
   const lenis = useLenis();
 
-  const handleClick = (e) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (lenis) {
       lenis.scrollTo(target, {
