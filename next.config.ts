@@ -6,6 +6,9 @@ const withMDX = createMDX({
 });
 
 const nextConfig: NextConfig = {
+  turbopack: {
+    resolveExtensions: [".mdx", ".tsx", ".ts", ".jsx", ".js", ".mjs", ".json"],
+  },
   async redirects() {
     return [
       {
@@ -40,11 +43,6 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
-  experimental: {
-    mdxRs: true,
-  },
 };
 
-// Merge MDX config with Next.js config
 export default withMDX(nextConfig);
