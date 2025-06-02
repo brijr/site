@@ -31,13 +31,9 @@ export default function HomePage() {
               </Child>
               <Child className="col-span-2">
                 <h4 className="text-muted-foreground">
-                  Currently, I work at{" "}
+                  Currently, I run{" "}
                   <a href="https://wip.ac" target="_blank" rel="noreferrer">
-                    WIP
-                  </a>
-                  ,{" "}
-                  <a href="https://ampry.com" target="_blank" rel="noreferrer">
-                    Ampry
+                    Work In Progress
                   </a>{" "}
                   and{" "}
                   <a href="https://9d8.dev" target="_blank" rel="noreferrer">
