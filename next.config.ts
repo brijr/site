@@ -43,6 +43,7 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
 };
 
 export default withMDX(nextConfig);
