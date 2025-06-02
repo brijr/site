@@ -12,11 +12,11 @@ export const metadata = {
 
 <PostWrapper>
 
-Lenis is a lightweight, robust, and performant smooth scroll library designed by @darkroom.engineering to be simple to use and easy to integrate into your projects. This guide covers implementing Lenis in Next.js 15 with React 19 support and the latest best practices.
+[Lenis](https://lenis.darkroom.engineering) is a lightweight, robust, and performant smooth scroll library designed by [@darkroom.engineering](https://darkroom.engineering) to be simple to use and easy to integrate into your projects. This guide covers implementing Lenis in [Next.js 15](https://nextjs.org/blog/next-15) with [React 19](https://react.dev/blog/2024/04/25/react-19) support and the latest best practices.
 
 ## What is Lenis?
 
-Lenis ("smooth" in latin) is a lightweight, robust, and performant smooth scroll library. It's designed by @darkroom.engineering to be simple to use and easy to integrate into your projects. It's built with performance in mind and is optimized for modern browsers. Key features include:
+[Lenis](https://lenis.darkroom.engineering) ("smooth" in latin) is a lightweight, robust, and performant smooth scroll library. It's designed by [@darkroom.engineering](https://darkroom.engineering) to be simple to use and easy to integrate into your projects. It's built with performance in mind and is optimized for modern browsers. Key features include:
 
 - Smooth momentum-based scrolling
 - Touch device support
@@ -38,7 +38,7 @@ yarn add lenis
 pnpm add lenis
 ```
 
-**Important:** The old `@studio-freight/lenis` and `@studio-freight/react-lenis` packages have been deprecated. Use the new `lenis` package instead.
+**Important:** The old `@studio-freight/lenis` and `@studio-freight/react-lenis` packages have been deprecated. Use the new [`lenis`](https://www.npmjs.com/package/lenis) package instead.
 
 ## Basic Implementation with autoRaf
 
@@ -109,7 +109,7 @@ html.lenis body {
 
 ### Step 3: Integration with Next.js 15
 
-For **App Router** (Next.js 13+):
+For **App Router** ([Next.js 13+](https://nextjs.org/docs/app)):
 
 ```jsx
 // app/layout.js
@@ -145,7 +145,7 @@ export default function App({ Component, pageProps }) {
 
 ## React 19 Compatible Implementation
 
-Next.js 15 includes React 19 support, which is now stable as of Next.js 15.1. Here's a React 19 compatible setup:
+[Next.js 15](https://nextjs.org/blog/next-15) includes [React 19](https://nextjs.org/blog/next-15-1) support, which is now stable as of [Next.js 15.1](https://nextjs.org/blog/next-15-1). Here's a React 19 compatible setup:
 
 ```jsx
 // components/LenisContext.jsx
@@ -292,7 +292,7 @@ const lenis = new Lenis({
 
 ## Integration with GSAP (Updated)
 
-The recommended GSAP integration has been updated for the latest versions:
+The recommended [GSAP ScrollTrigger](https://greensock.com/scrolltrigger/) integration has been updated for the latest versions:
 
 ```jsx
 // components/ScrollAnimations.jsx
@@ -512,7 +512,7 @@ export default function HomePage() {
 
 If upgrading from `@studio-freight/lenis`:
 
-1. **Update package**: Replace `@studio-freight/lenis` with `lenis`
+1. **Update package**: Replace `@studio-freight/lenis` with [`lenis`](https://www.npmjs.com/package/lenis)
 2. **Update imports**: Change import paths to use the new package
 3. **Use autoRaf**: Take advantage of the new `autoRaf: true` option
 4. **Enable anchors**: Set `anchors: true` for automatic anchor link handling
@@ -522,11 +522,11 @@ If upgrading from `@studio-freight/lenis`:
 
 1. **Use autoRaf**: Take advantage of the new `autoRaf` option for simpler setup
 2. **Enable anchor support**: Set `anchors: true` for better UX
-3. **Respect user preferences**: Check for `prefers-reduced-motion`
+3. **Respect user preferences**: Check for [`prefers-reduced-motion`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion)
 4. **Optimize for mobile**: Use `smoothTouch: false` for better performance
-5. **Leverage React 19 features**: Take advantage of React 19's improvements in Next.js 15.1+
+5. **Leverage React 19 features**: Take advantage of React 19's improvements in [Next.js 15.1+](https://nextjs.org/blog/next-15-1)
 6. **Use TypeScript**: Add proper type definitions for better DX
 
-This implementation provides smooth, performant scrolling throughout your Next.js 15 application while maintaining compatibility with React 19 and following current best practices.
+This implementation provides smooth, performant scrolling throughout your [Next.js 15](https://nextjs.org/blog/next-15) application while maintaining compatibility with [React 19](https://nextjs.org/blog/next-15-1) and following current best practices.
 
 </PostWrapper>
