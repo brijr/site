@@ -3,6 +3,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 import { Layout } from "@/components/craft";
+import { LenisProvider } from "@/components/providers/lenis-provider";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { Analytics } from "@vercel/analytics/next";
@@ -40,7 +41,7 @@ export default function RootLayout({
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased w-screen overflow-x-hidden",
-          fontSans.variable,
+          fontSans.variable
         )}
       >
         <ThemeProvider
@@ -49,10 +50,12 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
-          {children}
-          <Toggle />
-          <Toaster position="top-center" />
+          <LenisProvider>
+            <Header />
+            {children}
+            <Toggle />
+            <Toaster position="top-center" />
+          </LenisProvider>
         </ThemeProvider>
         <Analytics />
       </body>

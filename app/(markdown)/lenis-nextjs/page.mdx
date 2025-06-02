@@ -46,36 +46,58 @@ pnpm add lenis
 
 The latest Lenis version includes an `autoRaf` option that automatically handles the requestAnimationFrame loop:
 
-```jsx
-// components/LenisProvider.jsx
+```tsx
+// components/providers/lenis-provider.tsx
 "use client";
 
-import { useEffect } from "react";
+import { createContext, useContext, useEffect, useRef } from "react";
 import Lenis from "lenis";
 
-export default function LenisProvider({ children }) {
+import type { LenisOptions } from "lenis";
+
+const LenisContext = createContext<Lenis | null>(null);
+
+export function LenisProvider({
+  children,
+  options = {},
+}: {
+  children: React.ReactNode;
+  options?: LenisOptions;
+}) {
+  const lenisRef = useRef<Lenis | null>(null);
+
   useEffect(() => {
-    // Initialize Lenis with autoRaf
     const lenis = new Lenis({
-      autoRaf: true, // Automatically handle RAF
+      autoRaf: true,
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      direction: "vertical",
-      gestureDirection: "vertical",
-      smooth: true,
-      mouseMultiplier: 1,
-      smoothTouch: false,
       touchMultiplier: 2,
       infinite: false,
+      anchors: true,
+      ...options,
     });
 
-    // Cleanup
+    lenisRef.current = lenis;
+
     return () => {
       lenis.destroy();
+      lenisRef.current = null;
     };
-  }, []);
+  }, [options]);
 
-  return <>{children}</>;
+  return (
+    <LenisContext.Provider value={lenisRef.current}>
+      {children}
+    </LenisContext.Provider>
+  );
+}
+
+export function useLenis() {
+  const context = useContext(LenisContext);
+  if (context === undefined) {
+    throw new Error("useLenis must be used within a LenisProvider");
+  }
+  return context;
 }
 ```
 
@@ -113,7 +135,7 @@ For **App Router** ([Next.js 13+](https://nextjs.org/docs/app)):
 
 ```jsx
 // app/layout.js
-import LenisProvider from "@/components/LenisProvider";
+import { LenisProvider } from "@/components/providers/lenis-provider";
 import "./globals.css";
 
 export default function RootLayout({ children }) {
@@ -131,7 +153,7 @@ For **Pages Router** (legacy):
 
 ```jsx
 // pages/_app.js
-import LenisProvider from "@/components/LenisProvider";
+import { LenisProvider } from "@/components/providers/lenis-provider";
 import "../styles/globals.css";
 
 export default function App({ Component, pageProps }) {
@@ -140,63 +162,6 @@ export default function App({ Component, pageProps }) {
       <Component {...pageProps} />
     </LenisProvider>
   );
-}
-```
-
-## React 19 Compatible Implementation
-
-[Next.js 15](https://nextjs.org/blog/next-15) includes [React 19](https://nextjs.org/blog/next-15-1) support, which is now stable as of [Next.js 15.1](https://nextjs.org/blog/next-15-1). Here's a React 19 compatible setup:
-
-```jsx
-// components/LenisContext.jsx
-"use client";
-
-import { createContext, useContext, useEffect, useRef } from "react";
-import Lenis from "lenis";
-
-const LenisContext = createContext(null);
-
-export function LenisProvider({ children, options = {} }) {
-  const lenisRef = useRef(null);
-
-  useEffect(() => {
-    const lenis = new Lenis({
-      autoRaf: true,
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      direction: "vertical",
-      gestureDirection: "vertical",
-      smooth: true,
-      mouseMultiplier: 1,
-      smoothTouch: false,
-      touchMultiplier: 2,
-      infinite: false,
-      // New anchor support
-      anchors: true,
-      ...options,
-    });
-
-    lenisRef.current = lenis;
-
-    return () => {
-      lenis.destroy();
-      lenisRef.current = null;
-    };
-  }, [options]);
-
-  return (
-    <LenisContext.Provider value={lenisRef.current}>
-      {children}
-    </LenisContext.Provider>
-  );
-}
-
-export function useLenis() {
-  const context = useContext(LenisContext);
-  if (context === undefined) {
-    throw new Error("useLenis must be used within a LenisProvider");
-  }
-  return context;
 }
 ```
 
