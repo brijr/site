@@ -347,7 +347,7 @@ const handler = createMcpHandler(
 export { handler as GET, handler as POST };
 ```
 
-**Note:** For authentication in production deployments, you'll need to implement custom middleware or use Vercel's authentication features, as the MCP adapter itself doesn't include built-in authentication mechanisms.
+**Note:** For authentication in production deployments, you'll need to implement custom middleware or use [Vercel's authentication features](https://vercel.com/docs/functions/edge-middleware/middleware-api#authentication), as the MCP adapter itself doesn't include built-in authentication mechanisms.
 
 ## Step 7: Environment Variables
 
