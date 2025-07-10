@@ -33,7 +33,7 @@ export default function HomePage() {
                 <h4 className="text-muted-foreground">
                   Currently, I run{" "}
                   <a href="https://wip.ac" target="_blank" rel="noreferrer">
-                    Work In Progress
+                    WIP
                   </a>{" "}
                   and{" "}
                   <a href="https://9d8.dev" target="_blank" rel="noreferrer">
@@ -80,13 +80,13 @@ export default function HomePage() {
                   </a>
                 </p>
                 <p>
-                  + See my resume on{" "}
+                  + Connect on{" "}
                   <a
                     target="_blank"
                     rel="noreferrer"
-                    href="https://read.cv/brijr"
+                    href="https://linkedin.com/in/brijr"
                   >
-                    read.cv
+                    linkedin.com
                   </a>
                 </p>
               </Child>
