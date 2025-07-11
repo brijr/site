@@ -41,6 +41,11 @@ const nextConfig: NextConfig = {
         destination: "https://cal.com/brijr/30min",
         permanent: true,
       },
+      {
+        source: "/craft",
+        destination: "https://craft-ds.com",
+        permanent: true,
+      },
     ];
   },
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
