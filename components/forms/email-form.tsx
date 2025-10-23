@@ -29,7 +29,7 @@ const formSchema = z.object({
   }),
 });
 
-const transition = { type: "ease", ease: "easeInOut", duration: 0.4 };
+const transition = { type: "tween" as const, ease: "easeInOut" as const, duration: 0.4 };
 
 export function EmailForm({ label }: { label?: string }) {
   const [isSubmitted, setIsSubmitted] = useState(false);

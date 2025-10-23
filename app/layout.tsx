@@ -21,12 +21,108 @@ const fontSans = FontSans({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://bridger.to"),
-  title: "Bridger Tower / Designer and Software Engineer",
+  title: {
+    default: "Bridger Tower / Designer and Software Engineer",
+    template: "%s | Bridger Tower",
+  },
   description:
     "Bridger is a Design Engineer exploring user interface design, applied artificial intelligence, and human computer interaction.",
+  keywords: [
+    "Design Engineer",
+    "UI/UX Design",
+    "Software Engineer",
+    "Artificial Intelligence",
+    "Human Computer Interaction",
+    "Web Development",
+    "Frontend Development",
+    "Design Systems",
+  ],
+  authors: [{ name: "Bridger Tower", url: "https://bridger.to" }],
+  creator: "Bridger Tower",
+  publisher: "Bridger Tower",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   alternates: {
     canonical: "/",
   },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://bridger.to",
+    title: "Bridger Tower / Designer and Software Engineer",
+    description:
+      "Bridger is a Design Engineer exploring user interface design, applied artificial intelligence, and human computer interaction.",
+    siteName: "Bridger Tower",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Bridger Tower - Design Engineer",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Bridger Tower / Designer and Software Engineer",
+    description:
+      "Bridger is a Design Engineer exploring user interface design, applied artificial intelligence, and human computer interaction.",
+    creator: "@bridgertower",
+    images: ["/og-image.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google: "google-site-verification-code",
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://bridger.to/#person",
+      name: "Bridger Tower",
+      url: "https://bridger.to",
+      image: {
+        "@type": "ImageObject",
+        url: "https://bridger.to/og-image.png",
+      },
+      jobTitle: "Design Engineer",
+      description:
+        "Design Engineer exploring user interface design, applied artificial intelligence, and human computer interaction.",
+      sameAs: [
+        "https://x.com/bridgertower",
+        "https://github.com/brijr",
+        "https://linkedin.com/in/brijr",
+        "https://youtube.com/@bridgertower",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://bridger.to/#website",
+      url: "https://bridger.to",
+      name: "Bridger Tower",
+      description:
+        "Bridger is a Design Engineer exploring user interface design, applied artificial intelligence, and human computer interaction.",
+      publisher: {
+        "@id": "https://bridger.to/#person",
+      },
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -42,6 +138,10 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
