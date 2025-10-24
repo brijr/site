@@ -62,9 +62,10 @@ Create or update your .env file:
 R2_ACCESS_KEY_ID=your_access_key_id
 R2_SECRET_ACCESS_KEY=your_secret_access_key
 R2_BUCKET=your_bucket_name
-R2_ACCOUNT_ID=your_account_id
-R2_ENDPOINT=https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com
+R2_ENDPOINT=your-account-id.r2.cloudflarestorage.com
 ```
+
+**Important:** The `R2_ENDPOINT` should be just the domain without the `https://` protocol. The protocol will be added in the configuration code.
 
 ### 4. Configure Payload CMS
 
@@ -78,19 +79,18 @@ import path from "path";
 const storage = s3Storage({
   collections: {
     media: {
-      adapter: "s3", // Required
       disableLocalStorage: true, // Recommended for production
       prefix: "media", // Optional prefix for uploaded files
       generateFileURL: ({ filename, prefix }) =>
-        `https://<your-bucket>.<your-domain>/${prefix}/${filename}`, // Optional
+        `https://${process.env.R2_BUCKET}.${process.env.R2_ENDPOINT}/${prefix}/${filename}`,
     },
   },
-  bucket: process.env.R2_BUCKET,
+  bucket: process.env.R2_BUCKET || "",
   config: {
-    endpoint: process.env.R2_ENDPOINT,
+    endpoint: `https://${process.env.R2_ENDPOINT}` || "", // Protocol is required here
     credentials: {
-      accessKeyId: process.env.R2_ACCESS_KEY_ID,
-      secretAccessKey: process.env.R2_SECRET_ACCESS_KEY,
+      accessKeyId: process.env.R2_ACCESS_KEY_ID || "",
+      secretAccessKey: process.env.R2_SECRET_ACCESS_KEY || "",
     },
     region: "auto", // Required for R2
     forcePathStyle: true, // Required for R2
@@ -134,6 +134,8 @@ export default buildConfig({
   plugins: [storage],
 });
 ```
+
+> **Critical:** Note that the `endpoint` in the config requires the `https://` protocol prefix. The environment variable contains only the domain, and we add the protocol in the configuration. This is essential for the S3 client to work properly.
 
 ### 5. Public Access Configuration
 
@@ -218,17 +220,25 @@ try {
 
 ### Common Issues
 
+#### Invalid URL Error
+
+If you encounter `TypeError: Invalid URL` errors:
+
+- Ensure the `endpoint` in your config includes the `https://` protocol
+- The environment variable should contain ONLY the domain (e.g., `account-id.r2.cloudflarestorage.com`)
+- The protocol is added in the configuration: `` endpoint: `https://${process.env.R2_ENDPOINT}` ``
+
 #### Connection Errors
 
 - Verify R2 credentials are correct
-- Confirm endpoint URL format
+- Confirm endpoint URL format matches the pattern above
 - Check network connectivity
 - Validate IP allowlist settings
 
 #### Upload Failures
 
 - Verify bucket exists and is accessible
-- Check API token permissions
+- Check API token permissions (needs both Read & Write)
 - Confirm file size limits
 - Validate MIME type restrictions
 
